@@ -308,8 +308,8 @@ dassh_plot input_plot.txt
 
 A subset of the generated figures are shown here:
 
-![alt text](CoreSubchannelPlot_z=250.0.png)  
-*Coolant subchannel temperatures at 250 cm*
+![alt text](CoreSubchannelPlot_z=350.0.png)  
+*Coolant subchannel temperatures at 350 cm*
 
 
 ![alt text](CorePinPlot_fuel_cl_z=150.0.png)  

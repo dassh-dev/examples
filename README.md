@@ -4,7 +4,7 @@
 This repository contains example problems that demonstrate various DASSH features and capabilities. More problems, demonstrating more capabilities, will be added in the future.
 
 
-[Example 1](https://github.com/dassh-dev/examples/Example-1):
+[Example 1](https://github.com/dassh-dev/examples/tree/master/Example-1):
 Single-assembly problem with adiabatic radial boundary condition.  
 This problem demonstrates:  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\-
@@ -17,7 +17,7 @@ This problem demonstrates:
     Visualization integrated as a part of DASSH execution  
 
 
-[Example 2](https://github.com/dassh-dev/examples/Example-2):
+[Example 2](https://github.com/dassh-dev/examples/tree/master/Example-2):
 37-assembly problem with flowing inter-assembly gap coolant.  
 Demonstrates:  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\-
