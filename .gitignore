@@ -29,3 +29,14 @@ VARPOW.out
 dassh.log
 dassh_plot.log
 
+# CCCC files that are not required for examples
+**/GAMSOR_summary_table.out
+**/GPDINT
+**/GTFLUX
+**/PWDINT
+**/RTFLUX
+**/step1.*
+**/step2.*
+**/step3.*
+**/Translated_DIF3D.vtk
+
