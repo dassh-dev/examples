@@ -1,5 +1,5 @@
 # Example 2: 37-assembly problem
-Prepared 2021-06-02 using DASSH v0.6.5
+Prepared 2021-06-03 using DASSH v0.6.5
 
 ## Introduction
 
@@ -308,17 +308,17 @@ dassh_plot input_plot.txt
 
 A subset of the generated figures are shown here:
 
-![alt text](CoreSubchannelPlot_z=250.0.png)
+![alt text](CoreSubchannelPlot_z=250.0.png)  
 *Coolant subchannel temperatures at 250 cm*
 
 
-![alt text](CorePinPlot_fuel_cl_z=150.0.png)
+![alt text](CorePinPlot_fuel_cl_z=150.0.png)  
 *Fuel centerline temperatures at 150 cm*
 
 
-![alt text](CoreHexPlot_total_power.png)
+![alt text](CoreHexPlot_total_power.png)  
 *Assembly total power (MW)*
 
 
-![alt text](CoreHexPlot_avg_coolant_temp_z=400.0.png)
+![alt text](CoreHexPlot_avg_coolant_temp_z=400.0.png)  
 *Assembly average coolant outlet temperature*
