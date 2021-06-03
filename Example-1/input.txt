@@ -1,0 +1,117 @@
+########################################################################
+# author: Milos Atz
+# date: 2021-06-02
+# comment: DASSH Example 1 input for single assembly problem
+########################################################################
+# SETUP: Problem setup, user options, etc
+
+[Setup]
+    [[Units]]
+        temperature    = celsius
+        length         = cm
+        mass_flow_rate = kg/s
+    [[Options]]
+        calc_energy_balance = True
+        log_progress        = 200
+    [[Dump]]
+        coolant = True
+        pins    = True
+
+
+########################################################################
+# NEUTRONICS AND GEOMETRY FILES
+
+[ARC]
+    pmatrx = cccc/PMATRX
+    geodst = cccc/GEODST
+    ndxsrf = cccc/NDXSRF
+    znatdn = cccc/ZNATDN
+    labels = cccc/LABELS
+    nhflux = cccc/NHFLX0N
+    ghflux = cccc/NHFLX0G
+
+
+########################################################################
+# CORE DETAILS: Describe characteristics of the reactor core
+
+[Core]
+    coolant_inlet_temp = 355.0
+    fuel_material      = metal
+    fuel_alloy         = zr
+    coolant_material   = sodium_se2anl_425  # sodium
+    coolant_heating    = sodium
+    length             = 400.0
+    gap_model          = none
+    assembly_pitch     = 12.000
+    bypass_fraction    = 0.0
+    total_power        = 6.0e6
+    power_model        = pin_only
+
+
+########################################################################
+# ASSEMBLY DETAILS: Describe each assembly type
+# Add as many subsections as necessary
+
+[Assembly]
+
+    [[fuel]]
+        num_rings       = 10
+        pin_pitch       = 0.6500
+        pin_diameter    = 0.5400
+        clad_thickness  = 0.0350
+        wire_pitch      = 20.320
+        wire_diameter   = 0.1000  # 0.1000
+        duct_ftf        = 10.960, 11.560
+        duct_material   = ht9
+        corr_mixing     = MIT
+	corr_friction   = NOV
+	corr_flowsplit  = MIT
+	corr_nusselt    = DB
+        htc_params_duct = 0.025, 0.8, 0.8, 7.0
+        wire_direction  = counterclockwise
+        shape_factor    = 1.0
+        [[[FuelModel]]]
+            fcgap_thickness = 0.0
+            clad_material   = ht9
+            r_frac   =  0.0, 0.33333, 0.66667
+            pu_frac  = 0.20,    0.20,    0.20
+            zr_frac  = 0.10,    0.10,    0.10
+            porosity = 0.25,    0.25,    0.25
+
+
+########################################################################
+# ASSIGN assemblies to positions in the core; assign fixed
+# flow rates or temperature limits to one or multiple assemblies.
+# Indicate which assemblies must be grouped together in an orificing
+# calculation.
+
+[Assignment]
+    [[ByPosition]]
+        fuel = 1, 1, 1, DELTA_TEMP=150.0
+
+
+########################################################################
+# PLOT: Generate figures with results
+
+[Plot]
+    [[subchannel_temps]]
+        type        = SubchannelPlot
+        assembly_id = 1
+        z           = 150.0, 350.0
+        cmap        = jet
+        cbar_lbnd   = 355.0
+        cbar_ubnd   = 545.0
+        cbar_label  = Coolant temperature (˚C)
+        units       = celsius
+        pins        = True    # Overlay pins on subchannels
+        pin_alpha   = 0.8     # Opacity of pin fill
+
+     [[fuel_temps]]
+        type        = PinPlot
+        value       = clad_mw
+        assembly_id = 1
+        z           = 150.0, 250.0
+        cmap        = rainbow
+        cbar_label  = Clad MW temperature (˚C)
+        units       = celsius
+
