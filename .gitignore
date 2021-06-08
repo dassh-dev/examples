@@ -11,13 +11,16 @@ old/
 __pycache__/
 Example-1/__pycache__
 Example-2/__pycache__/
+Example-3/__pycache__
 
 # Any unix filesystem objects
 ._*
 .DS_Store*
 
-# Any CSV data files
+# Any CSV data files or Excel working notebooks
 *.csv
+*.xlsx
+*.xls
 
 # Any VARPOW output
 varpow_MatPower.out
@@ -40,3 +43,8 @@ dassh_plot.log
 **/step3.*
 **/Translated_DIF3D.vtk
 
+
+# Analysis files for Example-3
+Example-3/xx09_analysis.py
+Example-3/xx09_data.py
+Example-3/results_detailed/*

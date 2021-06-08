@@ -1,0 +1,106 @@
+########################################################################
+# author: Milos Atz
+# date: 2021-06-03
+# comment: XX09 example problem
+########################################################################
+# SETUP: Problem setup, user options, etc
+
+[Setup]
+    [[Units]]
+        temperature         = celsius
+        length              = cm
+        mass_flow_rate      = kg/s
+    [[Options]]
+        log_progress        = 100
+        calc_energy_balance = True
+    [[Dump]]
+        coolant             = True
+        pins                = True
+        average             = True
+
+
+########################################################################
+
+[Power]
+    user_power = xx09_pin_power.csv
+
+
+########################################################################
+# CORE DETAILS: Describe characteristics of the reactor core
+
+[Core]
+    coolant_inlet_temp = 351.55
+    fuel_material      = metal
+    fuel_alloy         = zr
+    coolant_material   = sodium
+    coolant_heating    = sodium
+    length             = 61.2
+    gap_model          = none
+    assembly_pitch     = 5.8929
+    bypass_fraction    = 0.0
+    # total_power        = 449.28e3
+    # total_power        = 475.763e3
+    total_power        = 486.2e3
+
+
+########################################################################
+# ASSEMBLY DETAILS: Describe a group of assemblies
+# NAME identifies a group of assemblies (e.g. "INNER_DRIVER")
+# Can be repeated for as many assemblies as required by the user.
+
+[Assembly]
+
+    [[xx09]]
+        num_rings       = 5
+        pin_pitch       = 0.5664                          # [3] (Figure A.22)
+        pin_diameter    = 0.4419                          # [1]
+        clad_thickness  = 0.0305                          # [1]
+        wire_pitch      = 15.2                            # [2]
+        wire_diameter   = 0.124                           # [1]
+        wire_direction  = counterclockwise
+        duct_ftf        = 4.6400, 4.8437, 5.6134, 5.8166  # [3]
+        duct_material   = ss304                           # [3]
+        corr_mixing     = MIT
+	corr_friction   = CTD
+	corr_flowsplit  = CTD
+	corr_nusselt    = DB
+        shape_factor    = 1.25
+        htc_params_duct = 0.025, 0.8, 0.8, 7.0
+        # bypass_gap_flow_fraction = 0.0914573
+        # bypass_gap_flow_fraction = 0.05
+        bypass_gap_flow_fraction = 0.09
+        [[[FuelModel]]]
+            clad_material   = ss316                       # [1]
+            gap_material    = sodium                      # [1]
+            fcgap_thickness = 0.0254                      # [1]
+            r_frac   =   0.0, 0.33333, 0.66667
+            pu_frac  = 0.000,   0.000,   0.000
+            zr_frac  = 0.001,   0.001,   0.001	          # [3]
+            porosity = 0.000,   0.000,   0.000
+
+
+########################################################################
+# ASSIGN assemblies to positions in the core; assign fixed
+# flow rates or temperature limits to one or multiple assemblies.
+# Indicate which assemblies must be grouped together in an orificing
+# calculation.
+
+[Assignment]
+    [[ByPosition]]
+        # xx09 = 1, 1, 1, FLOWRATE=2.6743272
+        # xx09 = 1, 1, 1, FLOWRATE=2.5789
+        xx09 = 1, 1, 1, FLOWRATE=2.6923
+
+
+# Note: Flow rate in the interior region should be 2.45 kg/s. However,
+# DASSH also needs to know the thimble (bypass) flow rate. Therefore,
+# the value we assign here is that for both the interior and bypass
+# regions. Total flow rate should be calculated as:
+# 2.45 / (1 - bypass_gap_flow_fraction)
+
+
+########################################################################
+# References
+# 1. Earl's report
+# 2. https://www.osti.gov/servlets/purl/5900075
+# 3. https://publications.anl.gov/anlpubs/2018/05/143362.pdf
