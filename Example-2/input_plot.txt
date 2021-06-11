@@ -1,34 +1,24 @@
  ########################################################################
 # author: Milos Atz
-# date: 2021-06-03
-# comment: DASSH input, 37-assembly core
-########################################################################
-# SETUP: PROBLEM ENVIRONMENT, USER OPTIONS, ETC
-
-#[Setup]
-#    [[Units]]
-#        temperature    = celsius
-#        length         = cm
-#        mass_flow_rate = kg/s
-
-
+# date: 2021-06-11
+# comment: dassh_plot input, 37-assembly core
 ########################################################################
 # PLOT: Generate figures with results
 
 [Plot]
      [[subchannel_temps]]
         type       = CoreSubchannelPlot
-        z          = 200.0, 350.0
+        z          = 2.000, 3.500  # m
         cmap       = jet
+        units      = celsius
         cbar_lbnd  = 355.0
         cbar_ubnd  = 545.0
         cbar_label = Coolant temperature (˚C)
-        units      = celsius
 
      [[fuel_temps]]
         type       = CorePinPlot
         value      = fuel_cl
-        z          = 150.0, 250.0
+        z          = 1.500, 2.500  # m
         cbar_label = Fuel CL temperature (˚C)
         units      = celsius
 
@@ -40,7 +30,7 @@
      [[avg_outlet_coolant_temp]]
          type        = CoreHexPlot
          value       = avg_coolant_temp
-         z           = 400.0
+         z           = 4.000  # m
          cbar_label  = Avg. coolant temperature (˚C)
          units       = celsius
 

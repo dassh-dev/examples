@@ -1,20 +1,15 @@
 ########################################################################
 # author: Milos Atz
-# date: 2021-02-18
-# comment: DASSH input, 19-assembly core
+# date: 2021-06-11
+# comment: DASSH input, 37-assembly core
 ########################################################################
 # SETUP: PROBLEM ENVIRONMENT, USER OPTIONS, ETC
 
 [Setup]
-    [[Units]]
-        temperature    = celsius
-        length         = cm
-        mass_flow_rate = kg/s
-    [[Options]]
-        log_progress          = 50
-        calc_energy_balance   = True
-        conv_approx           = True
-        conv_approx_dz_cutoff = 0.1
+    log_progress          = 50     # Print update every 50 steps
+    calc_energy_balance   = True   # Calculate energy balance
+    conv_approx           = True   # Apply convection approximation...
+    conv_approx_dz_cutoff = 0.001  # ...when step size < 0.1 cm.
     [[Dump]]
         coolant  = True
         average  = True
@@ -22,6 +17,7 @@
         pins     = True
         duct     = True
         interval = 10.0
+
 
 ########################################################################
  # CUSTOM MATERIAL PROPERTIES
@@ -35,33 +31,37 @@
     [[ht9_x]]
         thermal_conductivity = 26.0665655
 
-########################################################################
- # NEUTRONICS AND GEOMETRY FILES
 
-[ARC]
-    pmatrx = cccc/PMATRX
-    geodst = cccc/GEODST
-    ndxsrf = cccc/NDXSRF
-    znatdn = cccc/ZNATDN
-    labels = cccc/LABELS
-    nhflux = cccc/NHFLX0N
-    ghflux = cccc/NHFLX0G
+########################################################################
+# POWER DISTRIBUTIONS
+
+[Power]
+    total_power = 72.0e6
+    [[ARC]]
+        fuel_material   = metal
+        fuel_alloy      = zr
+        coolant_heating = sodium
+        # power_model     = pin_only
+        pmatrx = cccc/PMATRX
+        geodst = cccc/GEODST
+        ndxsrf = cccc/NDXSRF
+        znatdn = cccc/ZNATDN
+        labels = cccc/LABELS
+        nhflux = cccc/NHFLX0N
+        ghflux = cccc/NHFLX0G
+
 
 ########################################################################
 # CORE DETAILS: Describe characteristics of the reactor core
 
 [Core]
-    coolant_inlet_temp = 355.0
-    fuel_material      = metal
-    fuel_alloy         = zr
+    coolant_inlet_temp = 628.15
     coolant_material   = sodium_x
-    coolant_heating    = sodium
-    length             = 400.00
+    length             = 4.0000
     gap_model          = flow
-    bypass_fraction    = 0.01
-    assembly_pitch     = 12.000
-    total_power        = 72.0e6
-    # power_model        = pin_only
+    bypass_fraction    = 0.0100
+    assembly_pitch     = 0.1200
+
 
 ########################################################################
 # ASSEMBLY DETAILS: Describe a group of assemblies
@@ -72,12 +72,12 @@
 
     [[fuel]]
         num_rings       = 10
-        pin_pitch       = 0.6500
-        pin_diameter    = 0.5400
-        clad_thickness  = 0.0350
-        wire_pitch      = 20.320
-        wire_diameter   = 0.1000  # 0.1000
-        duct_ftf        = 10.960, 11.560
+        pin_pitch       = 0.00650
+        pin_diameter    = 0.00540
+        clad_thickness  = 0.00035
+        wire_pitch      = 0.20320
+        wire_diameter   = 0.00100
+        duct_ftf        = 0.10960, 0.11560
         duct_material   = ht9_x
         htc_params_duct = 0.025, 0.8, 0.8, 7.0
         wire_direction  = counterclockwise
@@ -92,12 +92,12 @@
 
     [[reflector]]
         num_rings       = 6
-        pin_pitch       = 1.1200
-        pin_diameter    = 1.0950
-        clad_thickness  = 0.1006
-        wire_pitch      = 20.419
-        wire_diameter   = 0.0123
-        duct_ftf        = 10.960, 11.560
+        pin_pitch       = 0.011200
+        pin_diameter    = 0.010950
+        clad_thickness  = 0.001006
+        wire_pitch      = 0.204190
+        wire_diameter   = 0.000123
+        duct_ftf        = 0.109600, 0.115600
         duct_material   = ht9_x
         htc_params_duct = 0.025, 0.8, 0.8, 7.0
         wire_direction  = counterclockwise
