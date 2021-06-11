@@ -18,7 +18,7 @@
 
 
 ########################################################################
-# NEUTRONICS AND GEOMETRY FILES
+# POWER DISTRIBUTIONS
 
 [Power]
     total_power = 6.0e6
