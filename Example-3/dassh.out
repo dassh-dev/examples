@@ -1,32 +1,32 @@
 DASSH: Ducted Assembly Steady-State Heat Transfer Code
-Version 0.6.7-dev
-Executed 2021-06-08 13:29:40.196121
+Version 0.6.10-dev
+Executed 2021-06-14 11:29:04.526078
 
 
 
 ASSEMBLY GEOMETRY SUMMARY
 --------------------------
 
- Parameter (cm // sqcm)  Assembly 1
+   Parameter (m // sqm)  Assembly 1
 -----------------------------------
                    Name        xx09
                    Pins          61
               Pin rings           5
-           Pin diameter 4.41900E-01
-              Pin pitch 5.66400E-01
-         Clad thickness 3.05000E-02
-             Wire pitch 1.52000E+01
-          Wire diameter 1.24000E-01
+           Pin diameter 4.41900E-03
+              Pin pitch 5.66400E-03
+         Clad thickness 3.05000E-04
+             Wire pitch 1.52000E-01
+          Wire diameter 1.24000E-03
          Wire direction countercloc
-            Pin-pin gap 1.24500E-01
-           Pin-wall gap 1.36983E-01
+            Pin-pin gap 1.24500E-03
+           Pin-wall gap 1.36983E-03
    Number of duct walls           2
   Number of bypass gaps           1
- Outside duct outer FTF 5.81660E+00
- Outside duct thickness 1.01600E-01
-     Bypass 1 thickness 3.84850E-01
-       Duct 1 outer FTF 4.84370E+00
-       Duct 1 thickness 1.01850E-01
+ Outside duct outer FTF 5.81660E-02
+ Outside duct thickness 1.01600E-03
+     Bypass 1 thickness 3.84850E-03
+       Duct 1 outer FTF 4.84370E-02
+       Duct 1 thickness 1.01850E-03
                 Coolant         126
             1. Interior          96
                 2. Edge          24
@@ -39,32 +39,32 @@ ASSEMBLY GEOMETRY SUMMARY
               7. Corner           6
                                    
         Subchannel area         ---
-       1. Interior area 5.61505E-02
-           2. Edge area 1.19969E-01
-         3. Corner area 4.63798E-02
-    Interior total area 8.54799E+00
-  6. Bypass 1 edge area 2.17979E-01
-7. Bypass 1 corner area 2.89832E-01
-    Bypass 1 total area 6.97049E+00
+       1. Interior area 5.61505E-06
+           2. Edge area 1.19969E-05
+         3. Corner area 4.63798E-06
+    Interior total area 8.54799E-04
+  6. Bypass 1 edge area 2.17979E-05
+7. Bypass 1 corner area 2.89832E-05
+    Bypass 1 total area 6.97049E-04
                                    
         Hydraulic diam.         ---
-         1. Interior De 2.52293E-01
-             2. Edge De 3.29441E-01
-           3. Corner De 2.61275E-01
-              Bundle De 2.74231E-01
-    6. Bypass 1 edge De 7.69700E-01
-  7. Bypass 1 corner De 7.69700E-01
-      Bypass 1 total De 7.69700E-01
+         1. Interior De 2.52293E-03
+             2. Edge De 3.29441E-03
+           3. Corner De 2.61275E-03
+              Bundle De 2.74231E-03
+    6. Bypass 1 edge De 7.69700E-03
+  7. Bypass 1 corner De 7.69700E-03
+      Bypass 1 total De 7.69700E-03
                                    
  Centroid-centroid dist         ---
-               1 <--> 1 3.27011E-01
-               1 <--> 2 3.42472E-01
-               2 <--> 2 5.66400E-01
-               2 <--> 3 3.86526E-01
-               3 <--> 3 3.34218E-01
-         Byp 1 6 <--> 6 5.66400E-01
-         Byp 1 6 <--> 7 6.59752E-01
-         Byp 1 7 <--> 7 7.53105E-01
+               1 <--> 1 3.27011E-03
+               1 <--> 2 3.42472E-03
+               2 <--> 2 5.66400E-03
+               2 <--> 3 3.86526E-03
+               3 <--> 3 3.34218E-03
+         Byp 1 6 <--> 6 5.66400E-03
+         Byp 1 6 <--> 7 6.59752E-03
+         Byp 1 7 <--> 7 7.53105E-03
                                    
            Correlations         ---
         Friction factor         ctd
@@ -98,9 +98,9 @@ Gr* >= 0.02, buoyancy effects should be important and the forced convection
 representation of the flow is not accurate.
 
                             Flow rate      Power         dz   Limiting                Forced
-Asm.       Name       Loc.     (kg/s)        (W)       (cm)         SC        Gr*  Conv Repr
+Asm.       Name       Loc.     (kg/s)        (W)        (m)         SC        Gr*  Conv Repr
 --------------------------------------------------------------------------------------------
-   1       xx09    ( 1, 1)  2.692E+00  4.862E+05  6.250E-01       3-22  2.706E-04          ✓
+   1       xx09    ( 1, 1)  2.692E+00  4.862E+05  6.250E-03       3-22  2.706E-04          ✓
 
 
 
@@ -122,10 +122,10 @@ Notes
 - Flow split can be obtained as ratio of subchannel and average velocities
 - Average values reported for assemblies without rod bundle specification
 
-                          |-------  --------  Velocity  (cm/s) -  --------  -------|    Bundle  Friction  Eddy Df.
-Asm.      Name      Pos.      Avg.      Int.      Edge    Corner    Bypass     Swirl        RE    Factor  (cm^2/s)
+                          |-------  --------  Velocity  (m/s) --  --------  -------|    Bundle  Friction  Eddy Df.
+Asm.      Name      Pos.      Avg.      Int.      Edge    Corner    Bypass     Swirl        RE    Factor   (m^2/s)
 ------------------------------------------------------------------------------------------------------------------
-   1      xx09   ( 1, 1)   336.000   327.669   356.314   287.218    40.022    55.474     29476  2.57E-02   3.31411
+   1      xx09   ( 1, 1)     3.360     3.277     3.563     2.872     0.400     0.555     29476  2.57E-02   0.00033
 
 
 
@@ -157,10 +157,10 @@ Column heading definitions
 
 Asm.            A            B            C            D            E            F            G          SUM        ERROR
 -------------------------------------------------------------------------------------------------------------------------
-   1   4.8622E+05   0.0000E+00  -3.2161E+04   3.2161E+04   2.6923E+00   1.2805E+03   1.4002E+02   3.4889E+03   7.1756E-03
+   1   4.8622E+05   0.0000E+00  -3.2161E+04   3.2161E+04   2.6923E+00   1.2805E+03   1.4002E+02   3.4891E+03   7.1760E-03
 -------------------------------------------------------------------------------------------------------------------------
- GAP   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   1.2951E+03   3.4106E-13   0.0000E+00   0.0000E+00
-CORE   4.8622E+05   0.0000E+00          ---          ---   2.6923E+00   1.2805E+03   1.4002E+02   3.4889E+03   7.1756E-03
+ GAP   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   1.2951E+03   0.0000E+00   0.0000E+00   0.0000E+00
+CORE   4.8622E+05   0.0000E+00          ---          ---   2.6923E+00   1.2805E+03   1.4002E+02   3.4891E+03   7.1760E-03
 
 
 
@@ -174,9 +174,9 @@ Column heading definitions
     Height - Axial height at which "Peak total" temp. occurs
 
                          Power    Flow rate  Bulk outlet  Peak outlet   Peak total     Peak ht.
-Asm.         Loc.          (W)       (kg/s)         (˚C)         (˚C)         (˚C)         (cm)
+Asm.         Loc.          (W)       (kg/s)          (K)          (K)          (K)          (m)
 -----------------------------------------------------------------------------------------------
-   1      ( 1, 1)  4.86200E+05  2.69230E+00       491.57       548.98       554.63        34.30
+   1      ( 1, 1)  4.86200E+05  2.69230E+00       764.72       822.13       827.78         0.34
 
 
 
@@ -195,28 +195,28 @@ Duct face key                  Face 6    =   Face 1
     Face 5:  9-o'clock                =     =
     Face 6: 11-o'clock         Face 4    =   Face 3
 
-                          |---------- Average duct MW temperature (˚C) ------------| Peak temp  Peak ht.
-Asm.      Loc.   Duct ID    Face 1    Face 2    Face 3    Face 4    Face 5    Face 6      (˚C)      (cm)
+                          |----------- Average duct MW temperature (K) ------------| Peak temp  Peak ht.
+Asm.      Loc.   Duct ID    Face 1    Face 2    Face 3    Face 4    Face 5    Face 6       (K)       (m)
 --------------------------------------------------------------------------------------------------------
-   1   ( 1, 1)         1    466.59    463.13    454.47    452.25    463.03    467.04    468.70     61.20
-   1   ( 1, 1)         2    460.48    458.02    449.64    444.07    455.30    460.67    462.88     61.20
+   1   ( 1, 1)         1    739.74    736.28    727.62    725.40    736.18    740.19    741.85      0.61
+   1   ( 1, 1)         2    733.63    731.17    722.79    717.22    728.45    733.82    736.03      0.61
 
 
 
 PEAK CLAD MW TEMPERATURES
 --------------------------
 
-                            Height Pin power   Nominal Radial Temperatures (˚C) --> 
-Asm.      Loc.       Pin      (cm)    (W/cm)   Coolant   Clad OD   Clad MW   Clad ID   Fuel OD   Fuel CL
+                            Height Pin power   Nominal Radial Temperatures (K) --> 
+Asm.      Loc.       Pin       (m)     (W/m)   Coolant   Clad OD   Clad MW   Clad ID   Fuel OD   Fuel CL
 --------------------------------------------------------------------------------------------------------
-   1   ( 1, 1)       827     34.30    188.93    554.50    563.82    573.47    583.88    591.67    631.35
+   1   ( 1, 1)       827      0.34  18883.91    827.65    836.96    846.62    857.01    864.80    904.47
 
 
 
 PEAK FUEL CL TEMPERATURES
 --------------------------
 
-                            Height Pin power   Nominal Radial Temperatures (˚C) --> 
-Asm.      Loc.       Pin      (cm)    (W/cm)   Coolant   Clad OD   Clad MW   Clad ID   Fuel OD   Fuel CL
+                            Height Pin power   Nominal Radial Temperatures (K) --> 
+Asm.      Loc.       Pin       (m)     (W/m)   Coolant   Clad OD   Clad MW   Clad ID   Fuel OD   Fuel CL
 --------------------------------------------------------------------------------------------------------
-   1   ( 1, 1)       827     34.30    188.93    554.50    563.82    573.47    583.88    591.67    631.35
+   1   ( 1, 1)       827      0.34  18883.91    827.65    836.96    846.62    857.01    864.80    904.47

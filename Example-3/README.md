@@ -1,5 +1,5 @@
 # Example 3: User-defined power distribution
-Prepared 2021-06-08 using DASSH v0.6.7
+Prepared 2021-06-14 using DASSH v0.6.10
 
 ## Introduction
 
@@ -22,10 +22,10 @@ q'(z) = Az^2 + C
 
 Note that the term `Bx` is omitted; it equals zero because the distribution is centered at `z = 0`. To determine `A` and `C` we need information about the XX09 power distribution. We assume XX09 has a total power of 486.2 kW [1], its power at the steady-state condition preceding the SHRT-17 test. It was reported that the peak linear power in XX09 is 25.6 kW/m for the assembly when operating at 468 kW (nominal) [2]. With that information, we can determine that:
 
-* `q'(z=0) = 265.96 W/cm = q'_max` at the fuel mid-plane (the given peak linear power scaled by `486.2 / 486.0`); therefore, we know `C = 265.96 W/cm`.
+* `q'(z=0) = 26596.0 W/m = q'_max` at the fuel mid-plane (the given peak linear power scaled by `486.2 / 468.0`); therefore, we know `C = 26596.0 W/m`.
 * The integral of `q'(z)` must equal `486.2 kW / 59 pins = 8240.68 W = q_tot`
 
-Evaluation of the integral of `q'(z)`between `z0 = -L/2` and `z1 = L/2` (where `L = 34.3 cm`), then solving for `A` yields:
+Evaluation of the integral of `q'(z)`between `z0 = -L/2` and `z1 = L/2` (where `L = 0.343 m`), then solving for `A` yields:
 
 ```
 A = 3 * (q_tot - q'_max * (z1-z0)) / (z1^3 - z0^3)
@@ -49,7 +49,7 @@ A = 12 * (q_tot - q'_max * L) / L^3 / (1 / L)^2
 A = 12 * (q_tot - q'_max * L) / L
 
 ```
-With that, and the values for `q_tot` and `q'_max`, we can create the power distribution for the 59 fueled pins in XX09. We assume that the two unfueled pins generate no power. We also assume that no power is generated in the plenum region.
+With that, and the values for `q_tot` and `q'_max`, we can create the power distribution for the 59 fueled pins in XX09. We assume that the two unfueled pins (pin 54 and 55 as indexed in DASSH) generate no power. We also assume that no power is generated in the plenum region.
 
 The resulting power distribution data is contained in `xx09_pin_power.csv`. The CSV is organized as follows:
 * The first column in the CSV is the assembly number. Because this is a single-assembly problem, all values equal 1.
@@ -74,13 +74,8 @@ The `Setup` block controls the problem environment and user options.
 
 ```
 [Setup]
-    [[Units]]
-        temperature    = celsius
-        length         = cm
-        mass_flow_rate = kg/s
-    [[Options]]
-        calc_energy_balance = True
-        log_progress        = 100
+    calc_energy_balance = True
+    log_progress        = 100
     [[Dump]]
         coolant = True
 
@@ -89,7 +84,8 @@ The `Setup` block controls the problem environment and user options.
 The `Power` block is used to point to the path of the CSV that contains the power distributions we made in the previous section.
 ```
 [Power]
-    user_power = xx09_pin_power.csv
+    user_power  = xx09_pin_power.csv
+    total_power = 486.2e3    # Normalize power distribution to this value
 
 ```
 
@@ -99,44 +95,39 @@ Note that two specifications are required for "coolant": `coolant_material` tell
 
 ```
 [Core]
-    coolant_inlet_temp = 351.55     # Inlet temperature to the reactor
-    fuel_material      = metal
-    fuel_alloy         = zr
+    coolant_inlet_temp = 624.70     # (K); based on 351.55˚C inlet temp
     coolant_material   = sodium
-    coolant_heating    = sodium
-    length             = 61.2       # We're only modeling the pin-bundle length
+    length             = 0.612      # (m); only model pin bundle length
+    assembly_pitch     = 0.058929   # (m)
     gap_model          = none
-    assembly_pitch     = 5.8929
-    bypass_fraction    = 0.0
-    total_power        = 486.2e3    # Normalize power distribution to this value
+    bypass_fraction    = 0.0        # no inter-asm gap bypass
 ```
 
 The assembly geometry parameters are input in the `Assembly` block. Here, we specify the geometry of the XX09 test subassembly, including both duct walls. The value of `shape_factor` is calculated based on the "conduction factor" relationship proposed by Cheng: `0.66 * (P / D) * ((P - D) / D)^-0.3`.
 
 ```
 [Assembly]
-
     [[xx09]]
         num_rings       = 5
-        pin_pitch       = 0.5664                          # [3] (Figure A.22)
-        pin_diameter    = 0.4419                          # [1]
-        clad_thickness  = 0.0305                          # [1]
-        wire_pitch      = 15.2                            # [2]
-        wire_diameter   = 0.124                           # [1]
+        pin_pitch       = 0.005664                                # [3]
+        pin_diameter    = 0.004419                                # [1]
+        clad_thickness  = 0.000305                                # [1]
+        wire_pitch      = 0.152                                   # [2]
+        wire_diameter   = 0.00124                                 # [1]
         wire_direction  = counterclockwise
-        duct_ftf        = 4.6400, 4.8437, 5.6134, 5.8166  # [3]
-        duct_material   = ss304                           # [3]
+        duct_ftf        = 0.046400, 0.048437, 0.056134, 0.058166  # [3]
+        duct_material   = ss304                                   # [3]
         corr_mixing     = MIT
         corr_friction   = CTD
-        corr_flowsplit  = CTD
-        corr_nusselt    = DB
-        shape_factor    = 1.25                            # From Cheng [4]
+    	corr_flowsplit  = CTD
+	    corr_nusselt    = DB
+        shape_factor    = 1.25
         htc_params_duct = 0.025, 0.8, 0.8, 7.0
-        bypass_gap_flow_fraction = 0.09                   # Expert input from E. Feldman
+        bypass_gap_flow_fraction = 0.09
         [[[FuelModel]]]
             clad_material   = ss316                       # [1]
             gap_material    = sodium                      # [1]
-            fcgap_thickness = 0.0254                      # [1]
+            fcgap_thickness = 0.000254                    # [1]
             r_frac   =   0.0, 0.33333, 0.66667
             pu_frac  = 0.000,   0.000,   0.000
             zr_frac  = 0.001,   0.001,   0.001            # [3]

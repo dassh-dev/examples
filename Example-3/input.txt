@@ -1,46 +1,35 @@
 ########################################################################
 # author: Milos Atz
-# date: 2021-06-03
+# date: 2021-06-14
 # comment: XX09 example problem
 ########################################################################
 # SETUP: Problem setup, user options, etc
 
 [Setup]
-    [[Units]]
-        temperature         = celsius
-        length              = cm
-        mass_flow_rate      = kg/s
-    [[Options]]
-        log_progress        = 100
-        calc_energy_balance = True
+    log_progress        = 100
+    calc_energy_balance = True
     [[Dump]]
-        coolant             = True
-        pins                = True
-        average             = True
+        coolant = True
+        pins    = True
 
 
 ########################################################################
 
 [Power]
-    user_power = xx09_pin_power.csv
+    user_power  = xx09_pin_power.csv
+    total_power = 486.2e3    # Normalize power to this value
 
 
 ########################################################################
 # CORE DETAILS: Describe characteristics of the reactor core
 
 [Core]
-    coolant_inlet_temp = 351.55
-    fuel_material      = metal
-    fuel_alloy         = zr
+    coolant_inlet_temp = 624.70     # (K); based on 351.55˚C inlet temp
     coolant_material   = sodium
-    coolant_heating    = sodium
-    length             = 61.2
+    length             = 0.612      # (m); only model pin bundle length
+    assembly_pitch     = 0.058929   # (m)
     gap_model          = none
-    assembly_pitch     = 5.8929
-    bypass_fraction    = 0.0
-    # total_power        = 449.28e3
-    # total_power        = 475.763e3
-    total_power        = 486.2e3
+    bypass_fraction    = 0.0        # no inter-asm gap bypass
 
 
 ########################################################################
@@ -49,30 +38,27 @@
 # Can be repeated for as many assemblies as required by the user.
 
 [Assembly]
-
     [[xx09]]
         num_rings       = 5
-        pin_pitch       = 0.5664                          # [3] (Figure A.22)
-        pin_diameter    = 0.4419                          # [1]
-        clad_thickness  = 0.0305                          # [1]
-        wire_pitch      = 15.2                            # [2]
-        wire_diameter   = 0.124                           # [1]
+        pin_pitch       = 0.005664                                # [3]
+        pin_diameter    = 0.004419                                # [1]
+        clad_thickness  = 0.000305                                # [1]
+        wire_pitch      = 0.152                                   # [2]
+        wire_diameter   = 0.00124                                 # [1]
         wire_direction  = counterclockwise
-        duct_ftf        = 4.6400, 4.8437, 5.6134, 5.8166  # [3]
-        duct_material   = ss304                           # [3]
+        duct_ftf        = 0.046400, 0.048437, 0.056134, 0.058166  # [3]
+        duct_material   = ss304                                   # [3]
         corr_mixing     = MIT
 	corr_friction   = CTD
 	corr_flowsplit  = CTD
 	corr_nusselt    = DB
         shape_factor    = 1.25
         htc_params_duct = 0.025, 0.8, 0.8, 7.0
-        # bypass_gap_flow_fraction = 0.0914573
-        # bypass_gap_flow_fraction = 0.05
         bypass_gap_flow_fraction = 0.09
         [[[FuelModel]]]
             clad_material   = ss316                       # [1]
             gap_material    = sodium                      # [1]
-            fcgap_thickness = 0.0254                      # [1]
+            fcgap_thickness = 0.000254                    # [1]
             r_frac   =   0.0, 0.33333, 0.66667
             pu_frac  = 0.000,   0.000,   0.000
             zr_frac  = 0.001,   0.001,   0.001	          # [3]
@@ -87,8 +73,6 @@
 
 [Assignment]
     [[ByPosition]]
-        # xx09 = 1, 1, 1, FLOWRATE=2.6743272
-        # xx09 = 1, 1, 1, FLOWRATE=2.5789
         xx09 = 1, 1, 1, FLOWRATE=2.6923
 
 
