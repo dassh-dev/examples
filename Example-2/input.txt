@@ -84,7 +84,7 @@
         shape_factor = 1.1
         [[[FuelModel]]]
             fcgap_thickness = 0.0
-            clad_material   = HT9_se2anl
+            clad_material   = ht9_x
             r_frac   =  0.0, 0.33333, 0.66667
             pu_frac  = 0.20,    0.20,    0.20
             zr_frac  = 0.10,    0.10,    0.10
