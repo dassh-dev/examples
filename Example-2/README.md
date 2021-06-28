@@ -1,5 +1,5 @@
 # Example 2: 37-assembly problem
-Prepared 2021-06-11 using DASSH v0.6.9
+Prepared 2021-06-11 using DASSH v0.6.11
 
 ## Introduction
 
