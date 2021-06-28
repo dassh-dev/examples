@@ -1,13 +1,13 @@
 DASSH: Ducted Assembly Steady-State Heat Transfer Code
 Version 0.6.11-dev
-Executed 2021-06-28 15:38:58.806996
+Executed 2021-06-28 17:29:28.591478
 
 
 
 ASSEMBLY GEOMETRY SUMMARY
 --------------------------
 
-   Parameter (m // sqm)  Assembly 1  Assembly 2
+   Parameter (m // m)^2  Assembly 1  Assembly 2
 -----------------------------------------------
                    Name        fuel   reflector
                    Pins         271          91
@@ -246,7 +246,7 @@ Column heading definitions
     A - Heat added to coolant through pins or by direct heating (W)
     B - Heat added to duct wall (W)
     C - Heat transferred to assembly-interior coolant through duct wall (W)
-    D - Heat transferred to bypass coolant through duct wall (W) (*)
+    D - Heat transferred to double-duct bypass coolant through duct walls (W)
     E - Assembly coolant mass flow rate (kg/s)
     F - Assembly axially averaged heat capacity (J/kg-K)
     G - Assembly coolant temperature rise (K)
@@ -302,7 +302,7 @@ INTER-ASSEMBLY HEAT TRANSFER
 -----------------------------
 Notes
 - Tracks heat transfer between assemblies and inter-assembly gap coolant
-- Positive values indicate heat gained through the inter-assembly gap
+- Positive values indicate heat gained by assemblies through inter-assembly gap
 - Duct faces are as shown in the key below
 - Adjacent assembly ID is shown in parentheses next to each value.
 
@@ -314,7 +314,7 @@ Duct face key                  Face 6    =   Face 1
     Face 5:  9-o'clock                =     =
     Face 6: 11-o'clock         Face 4    =   Face 3
 
-                        |-- Energy through outer duct face (W); (adjacent assembly ID) -->
+                        |-- Power (W) through outer duct face; (adjacent assembly ID) -->
 Asm.         Power (W)            Face 1            Face 2            Face 3            Face 4            Face 5            Face 6
 ----------------------------------------------------------------------------------------------------------------------------------
    1       5.36024E+06   4.067E+02 (003)   4.067E+02 (002)   4.067E+02 (007)   4.067E+02 (006)   4.067E+02 (005)   4.067E+02 (004)
