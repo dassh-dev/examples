@@ -1,4 +1,4 @@
-# Example 2: Orificing optimization demonstration
+# Example 4: Orificing optimization demonstration
 Prepared 2021-11-03 using DASSH v0.8.0
 
 ## Introduction
