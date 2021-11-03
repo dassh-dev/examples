@@ -39,3 +39,9 @@ Demonstrates:\
     Double-ducted assembly setup\
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\-
     Comparison of DASSH results with measured data
+
+[Example 4](https://github.com/dassh-dev/examples/tree/master/Example-4):
+Optimize coolant flow orificing on system from Example-2 to minimize peak fuel centerline temperature.\
+Demonstrates:\
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\-
+    DASSH coolant flow orificing optimization algorithm\
